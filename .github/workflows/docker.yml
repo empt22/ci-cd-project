@@ -7,7 +7,7 @@ on:
   workflow_dispatch:  # for manual trigger
 
 jobs:
-  build-and-push
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
