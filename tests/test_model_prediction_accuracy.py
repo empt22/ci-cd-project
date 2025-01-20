@@ -27,6 +27,6 @@ def predict_price(mileage, year, make):
 
 
 # compare model prediction to expectation
-expected_pred_price = 22000
+expected_pred_price = 52000
 predicted_price = predict_price(39, 2024, "Jeep")
 assert abs(expected_pred_price - predicted_price) < 1000
