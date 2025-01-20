@@ -1,0 +1,31 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main  # for any pushes to main branch
+  workflow_dispatch:  # for manual trigger
+
+jobs:
+  build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name : log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build Docker Image
+      run: |
+        docker build -t ghcr.io/${{ github.repository_owner }}/car-price-predictor:latest .
+
+    - name: Push Docker Image to GHCR
+      run: |
+        docker push ghcr.io/${{ github.repository_owner }}/car-price-predictor:latest
+
